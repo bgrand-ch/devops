@@ -23,3 +23,11 @@ spec:
             preStop:
               exec:
                 command: ["/usr/sbin/nginx","-s","quit"]
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /nginx.conf
+              readOnly: true
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf

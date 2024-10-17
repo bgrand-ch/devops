@@ -13,6 +13,7 @@ More info: https://kubernetes.io/docs/tasks/access-application-cluster/connectin
 2. In the terminal, run `kubectl version` to confirm that the cli has been installed.
 3. Run `kubectl apply -f ./backend/deployment.yaml` to create the backend deployment.
 4. Run `kubectl apply -f ./backend/service.yaml` to create the backend service object.
-5. Run `kubectl apply -f ./frontend/deployment.yaml` to create the frontend deployment.
-6. Run `kubectl apply -f ./frontend/service.yaml` to create the frontend service object.
-6. Run `kubectl get service frontend` which finds the external ip to interact with the frontend service from outside the cluster.
+5. Run `kubectl apply -f ./frontend/config.yaml` to create the nginx config map.
+6. Run `kubectl apply -f ./frontend/deployment.yaml` to create the frontend deployment.
+7. Run `kubectl apply -f ./frontend/service.yaml` to create the frontend service object.
+8. Run `kubectl get service frontend` which finds the external ip to interact with the frontend service from outside the cluster.

@@ -26,4 +26,4 @@ RUN echo "### NGINX BASE CONTAINER INITIATED ###"
 COPY --from=build /app/build /usr/share/nginx/html
 RUN echo "### APP STATIC FILES COPIED ###"
 
-EXPOSE 8080:80
+EXPOSE 80

@@ -2,8 +2,8 @@
 
 ## Prerequisites
 
-- Use version 20 or higher of Node.
 - Go to `app` folder with `cd ./app`.
+- Use version 20 or higher of Node.
 - Install dependencies with `npm install`.
 
 ## Local development
@@ -28,6 +28,6 @@ npm run serve
 
 ```shell
 docker build --tag frontend-app .
-docker run --detach --publish 8080:80 frontend-app
+docker run --detach --publish 80 frontend-app
 docker ps
 ```

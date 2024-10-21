@@ -1,0 +1,9 @@
+# Folders
+tests
+
+# Files
+.env.example
+.gitattributes
+.dockerignore
+Dockerfile
+phpunit.xml

@@ -1,6 +1,7 @@
 # Folders
 node_modules
 coverage
+vendor
 build
 .pnp
 
@@ -10,3 +11,15 @@ build
 *.log*
 .env*
 !.env.example
+
+# Laravel only
+.phpactor.json
+.phpunit.result.cache
+.phpunit.cache
+public/hot
+public/storage
+storage/*.key
+storage/pail
+Homestead.json
+Homestead.yaml
+auth.json

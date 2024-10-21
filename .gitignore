@@ -1,0 +1,12 @@
+# Folders
+node_modules
+coverage
+build
+.pnp
+
+# Files
+.pnp.js
+.DS_Store
+*.log*
+.env*
+!.env.example

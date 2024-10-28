@@ -1,19 +1,69 @@
-# Kubernetes
+# DevOps playground
 
-## Connect frontend to backend using services
+> **Work in progress:** Kubernetes resources are currently being modified and the corresponding documentation is not necessarily up to date.
 
-This task shows how to create a frontend and a backend microservice.
-The backend microservice is a hello greeter. The frontend exposes the backend using nginx and a Kubernetes Service object.
+## Objective
 
-More info: https://kubernetes.io/docs/tasks/access-application-cluster/connecting-frontend-backend/
+### Flow
 
-## Configure frontend and backend
+Web browser <--> Localhost URL <--> React (SSR) <--> Laravel API
 
-1. Install Docker Desktop and [enable Kubernetes](https://docs.docker.com/desktop/kubernetes/).
-2. In the terminal, run `kubectl version` to confirm that the cli has been installed.
-3. Run `kubectl apply -f ./backend/deployment.yaml` to create the backend deployment.
-4. Run `kubectl apply -f ./backend/service.yaml` to create the backend service object.
-5. Run `kubectl apply -f ./frontend/config.yaml` to create the nginx config map.
-6. Run `kubectl apply -f ./frontend/deployment.yaml` to create the frontend deployment.
-7. Run `kubectl apply -f ./frontend/service.yaml` to create the frontend service object.
-8. Run `kubectl get service frontend` which finds the external ip to interact with the frontend service from outside the cluster.
+### Result
+
+Display a JSON response from the API in the front-end app.
+
+## Prerequisites
+
+- Install Node (>= 20).
+- Install PHP (>= 8) and Composer.
+- Install Docker Desktop and enable Kubernetes.
+
+## Local development without Kubernetes
+
+### Install dependencies
+
+Back:
+```shell
+composer install --working-dir back
+```
+
+Front:
+```shell
+npm install --prefix front
+```
+
+### Run microservices
+
+Back:
+```shell
+(cd back && php artisan serve) # directory changed in the subshell
+```
+
+Front:
+```shell
+npm start --prefix front
+```
+
+## Local development with Kubernetes
+
+### Create resources
+
+Back:
+```shell
+kubectl apply -f infra/back/deployment.yaml
+kubectl apply -f infra/back/service.yaml
+```
+
+Front:
+```shell
+kubectl apply -f infra/front/config.yaml
+kubectl apply -f infra/front/deployment.yaml
+kubectl apply -f infra/front/service.yaml
+```
+
+### Use microservices
+
+Front:
+```shell
+kubectl get service app # finds ip to interact with front app
+```

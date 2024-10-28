@@ -46,6 +46,8 @@ npm start --prefix front
 
 ## Local development with Kubernetes
 
+**Important:** Start Docker Desktop and enable Kubernetes.
+
 ### Create resources
 
 Back:

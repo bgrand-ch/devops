@@ -1,29 +1,26 @@
-##
-# Step 1: Build app static files (spa) with node
-##
+FROM node:alpine
 
-FROM node:alpine AS build
-RUN echo "### NODE BASE CONTAINER INITIATED ###"
+# https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine
+# RUN apk add --no-cache libc6-compat
 
-# Copy app files
-COPY . /app
-WORKDIR /app
-RUN echo "### LOCAL APP FILES COPIED ###"
+# Copy local files
+COPY . /front
+WORKDIR /front
 
-# Build app static files
+# Configure Next
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build files for production
 RUN npm ci
 RUN npm run build
-RUN echo "### APP STATIC FILES BUILT ###"
 
-##
-# Step 2: Serve app static files (spa) with nginx
-##
+# Set permission for prerender cache
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+RUN chown nextjs:nodejs .next
 
-FROM nginx:alpine AS serve
-RUN echo "### NGINX BASE CONTAINER INITIATED ###"
+USER nextjs
+EXPOSE 3000
 
-# Copy app static files
-COPY --from=build /app/build /usr/share/nginx/html
-RUN echo "### APP STATIC FILES COPIED ###"
-
-EXPOSE 80
+CMD ["npm", "start"]

@@ -18,7 +18,7 @@ Display a JSON response from the API in the front-end app.
 - Install PHP (>= 8) and Composer.
 - Install Docker Desktop and enable Kubernetes.
 
-## Local development without Kubernetes
+## Local development
 
 ### Install dependencies
 
@@ -32,7 +32,7 @@ Front:
 npm install --prefix front
 ```
 
-### Run microservices
+### Run applications
 
 Back:
 ```shell
@@ -41,7 +41,35 @@ Back:
 
 Front:
 ```shell
-npm start --prefix front
+npm run dev --prefix front
+```
+
+## Local development with Docker
+
+**Important:** Start Docker Desktop.
+
+### Build app images
+
+Back:
+```shell
+# TODO
+```
+
+Front:
+```shell
+docker build front -t front-app
+```
+
+### Run app images
+
+Back:
+```shell
+# TODO
+```
+
+Front:
+```shell
+docker run --detach --publish 8080:3000 front-app # http://localhost:8080
 ```
 
 ## Local development with Kubernetes
@@ -63,9 +91,9 @@ kubectl apply -f infra/front/deployment.yaml
 kubectl apply -f infra/front/service.yaml
 ```
 
-### Use microservices
+### Use applications
 
 Front:
 ```shell
-kubectl get service app # finds ip to interact with front app
+kubectl get service app # finds ip to interact with front-end app
 ```

@@ -6,11 +6,18 @@ build
 .pnp
 
 # Files
-.pnp.js
+.pnp.*
 .DS_Store
+*.pem
 *.log*
 .env*
 !.env.example
+*.tsbuildinfo
+
+# Next only
+next-env.d.ts
+.next
+out
 
 # Laravel only
 .phpactor.json

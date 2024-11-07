@@ -6,16 +6,16 @@
 
 ### Flow
 
-Web browser <--> Localhost URL <--> React (SSR) <--> Laravel API
+Web browser <--> Localhost URL <--> Next.js (SSR) <--> Laravel (API)
 
 ### Result
 
-Display a JSON response from the API in the front-end app.
+Display a JSON response in the front-end app from the back-end API.
 
 ## Prerequisites
 
-- Install Node (>= 20).
-- Install PHP (>= 8) and Composer.
+- Install NVM to manage Node versions.
+- Install PHP (>= 8.3) and latest Composer version.
 - Install Docker Desktop and enable Kubernetes.
 
 ## Local development
@@ -29,7 +29,7 @@ composer install --working-dir back
 
 Front:
 ```shell
-npm install --prefix front
+(cd front && nvm use && npm install) # directory changed in the subshell
 ```
 
 ### Run applications
@@ -41,7 +41,7 @@ Back:
 
 Front:
 ```shell
-npm run dev --prefix front
+(cd front && nvm use && npm run dev) # directory changed in the subshell
 ```
 
 ## Local development with Docker
@@ -57,7 +57,7 @@ Back:
 
 Front:
 ```shell
-docker build front -t front-app
+docker build front --tag front-app
 ```
 
 ### Run app images

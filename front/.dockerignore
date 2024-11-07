@@ -6,3 +6,4 @@ node_modules
 .nvmrc
 .dockerignore
 Dockerfile
+next-env.d.ts

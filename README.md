@@ -64,7 +64,7 @@ docker build front --tag front-app
 
 Back:
 ```shell
-# TODO
+docker run --detach --publish 8181:80 back-app # http://localhost:8181
 ```
 
 Front:

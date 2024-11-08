@@ -4,6 +4,7 @@ node_modules
 
 # Files
 .nvmrc
+.env.example
 .dockerignore
 Dockerfile
 next-env.d.ts

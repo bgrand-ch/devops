@@ -1,14 +1,21 @@
-FROM php:fpm-alpine AS build
-RUN echo "### PHP BASE CONTAINER INITIATED ###"
+FROM php:apache
 
-COPY . /var/www/app
-USER root
-RUN chmod 777 -R /var/www/app
-WORKDIR /var/www/app
+# Install required PHP extensions
+# RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install zip
 
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-COPY composer.json ./
-RUN composer install
-RUN echo "### COMPOSER INSTALLED ###"
+# Copy local files
+COPY . /var/www/html
+WORKDIR /var/www/html
 
-CMD ["php-fpm"]
+# Configure Compose
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Install dependencies for production
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN composer install --no-dev
+
+EXPOSE 80
+EXPOSE 443
+
+CMD ["apache2ctl", "-D", "FOREGROUND"]

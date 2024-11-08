@@ -52,7 +52,7 @@ Front:
 
 Back:
 ```shell
-# TODO
+docker build back --tag back-app
 ```
 
 Front:

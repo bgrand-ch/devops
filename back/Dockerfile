@@ -1,7 +1,7 @@
 FROM php:apache
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV APACHE_DOCUMENT_ROOT=/var/www/app/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/public
 
 # Install required libraries
 RUN apt update
@@ -14,8 +14,8 @@ RUN docker-php-ext-install zip pdo_mysql
 RUN a2enmod rewrite
 
 # Copy local files
-COPY . /var/www/app
-WORKDIR /var/www/app
+COPY . /var/www
+WORKDIR /var/www
 
 # Update default Apache site configuration
 COPY apache.conf /etc/apache2/sites-available/000-default.conf
@@ -26,7 +26,8 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev
 
 # Set permissions for Laravel
-RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chown -R www-data:www-data /var/www
+RUN chmod -R 775 /var/www/storage
 
 EXPOSE 80
 EXPOSE 443

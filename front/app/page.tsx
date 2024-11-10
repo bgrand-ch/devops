@@ -1,12 +1,26 @@
 type Data = {
-  test: boolean
+  status: 'success'|'error',
+  isTest: boolean
 }
 
-// TODO: Get data from back-end api
-export default function Home() {
-  const data: Data = {
-    test: true
+async function getApiData (apiUrl: string): Promise<Data> {
+  try {
+    const result = await fetch(apiUrl, { cache: 'no-store' })
+    const data: Data = await result.json()
+
+    return data
+  } catch {
+    const data: Data = {
+      status: 'error',
+      isTest: true
+    }
+
+    return data
   }
+}
+
+export default async function Home() {
+  const data = await getApiData('http://api')
 
   return (
     <div>

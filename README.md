@@ -52,24 +52,29 @@ Front:
 
 Back:
 ```shell
-docker build back --tag back-app
+docker build back --tag back-app --no-cache
 ```
 
 Front:
 ```shell
-docker build front --tag front-app
+docker build front --tag front-app --no-cache
 ```
 
 ### Run app images
 
+Network:
+```shell
+docker network create api
+```
+
 Back:
 ```shell
-docker run --detach --publish 8181:80 back-app # http://localhost:8181
+docker run --detach --network api --name api back-app # http://api (only inside network containers)
 ```
 
 Front:
 ```shell
-docker run --detach --publish 8080:3000 front-app # http://localhost:8080
+docker run --detach --network api --publish 8080:3000 front-app # http://localhost:8080 (only in host browser)
 ```
 
 ## Local development with Kubernetes

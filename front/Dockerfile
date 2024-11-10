@@ -7,8 +7,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # RUN apk add --no-cache libc6-compat
 
 # Copy local files
-COPY . /app
-WORKDIR /app
+COPY . /var/www
+WORKDIR /var/www
 
 # Build files for production
 RUN npm ci
